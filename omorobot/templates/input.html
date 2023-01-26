@@ -11,9 +11,9 @@
           <h3 class="text-primary"><i class="fa fa-home"></i> sixman</h3>
         </a>
         <div class="navbar-nav w-100">
-          <a href="/index/" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-          <a href="/detail/" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>Detail</a>
-          <a href="/input/" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Input</a>
+          <a href="/index/" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+          <a href="/detail/" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Detail</a>
+          <a href="/input/" class="nav-item nav-link active"><i class="fa fa-keyboard me-2"></i>Input</a>
           <a href="/record/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Record</a>
           <a href="/realtime/" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Realtime</a>
           <div class="nav-item dropdown">
@@ -34,38 +34,33 @@
       <!-- Navbar Start -->
       {% include 'navbar.html' %}
       <!-- Navbar End -->
-
-
-      <!-- Chart Start -->
-      <div class="container-fluid pt-4 px-4">
-        <div class="row g-4">
-          <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary rounded h-100 p-4">
-              <h6 class="mb-4">Single Line Chart</h6>
-              <canvas id="line-chart"></canvas>
+      <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded h-100 p-4">
+          <h6 class="mb-4">Basic Form</h6>
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+              </div>
             </div>
-          </div>
-          <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary rounded h-100 p-4">
-              <h6 class="mb-4">Multiple Line Chart</h6>
-              <canvas id="salse-revenue"></canvas>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
             </div>
-          </div>
-          <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary rounded h-100 p-4">
-              <h6 class="mb-4">Single Bar Chart</h6>
-              <canvas id="bar-chart"></canvas>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-          </div>
-          <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary rounded h-100 p-4">
-              <h6 class="mb-4">Doughnut Chart</h6>
-              <canvas id="doughnut-chart"></canvas>
-            </div>
-          </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </form>
         </div>
       </div>
-      <!-- Chart End -->
+
+
+
+
+
 
 
       <!-- Footer Start -->
@@ -85,7 +80,7 @@
   <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
 
   <!-- Template Javascript -->
-  <script src="{% static 'js/detail.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>
