@@ -11,19 +11,22 @@
           <h3 class="text-primary"><i class="fa fa-home"></i> sixman</h3>
         </a>
         <div class="navbar-nav w-100">
-          {% if User != "main" %}
-          <a href="/index/{{User}}/" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-          <a href="/detail/{{User}}/" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>Detail</a>
-          <a href="/input/{{User}}/" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Input</a>
-          <a href="/record/{{User}}/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Record</a>
-          <a href="/realtime/{{User}}/" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Realtime</a>
+          {% if context.User != "main" %}
+          <a href="/index/{{context.User}}/" class="nav-item nav-link"><i
+              class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+          <a href="/detail/{{context.User}}/" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>Detail</a>
+          <a href="/input/{{context.User}}/" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Input</a>
+          <a href="/record/{{context.User}}/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Record</a>
+          <a href="/realtime/{{context.User}}/" class="nav-item nav-link"><i
+              class="fa fa-chart-bar me-2"></i>Realtime</a>
           <div class="nav-item dropdown">
-          <a href="/disign/{{User}}/" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Design</a>
-          <div class="dropdown-menu bg-transparent border-0">
-            <a href="signin.html" class="dropdown-item">Sign In</a>
-            <a href="signup.html" class="dropdown-item">Sign Up</a>
+            <a href="/disign/{{context.User}}/" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                class="far fa-file-alt me-2"></i>Design</a>
+            <div class="dropdown-menu bg-transparent border-0">
+              <a href="signin.html" class="dropdown-item">Sign In</a>
+              <a href="signup.html" class="dropdown-item">Sign Up</a>
+            </div>
           </div>
-        </div>
           {% else %}
           <a href="/index/main/" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
           <a href="/detail/main/" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>Detail</a>
@@ -33,11 +36,11 @@
           <div class="nav-item dropdown">
             <a href="/disign/main/" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                 class="far fa-file-alt me-2"></i>Design</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                  <a href="signin.html" class="dropdown-item">Sign In</a>
-                  <a href="signup.html" class="dropdown-item">Sign Up</a>
-                </div>
-              </div>
+            <div class="dropdown-menu bg-transparent border-0">
+              <a href="signin.html" class="dropdown-item">Sign In</a>
+              <a href="signup.html" class="dropdown-item">Sign Up</a>
+            </div>
+          </div>
           {% endif %}
         </div>
       </nav>
@@ -49,57 +52,66 @@
       <!-- Navbar Start -->
       {% include 'navbar.html' %}
       <!-- Navbar End -->
-
-      <div class="col-sm-12 col-xl-6">
-        <div class="bg-secondary rounded h-100 p-4">
-          <h6 class="mb-4">Basic Accordion</h6>
-          <div class="accordion" id="accordionExample">
-            <div class="accordion-item bg-transparent">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                  aria-expanded="true" aria-controls="collapseOne">
-                  Accordion Item #1
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  Gubergren justo eos magna eirmod lorem magna, amet dolores ipsum sadipscing ipsum consetetur invidunt
-                  et clita diam, vero dolor dolor est eirmod. Rebum accusam amet ipsum et. Et et lorem sanctus amet eos
-                  eos elitr ea, sanctus magna et et sed eos sit takimata sadipscing, dolor rebum sed stet vero.
+      <div class="container-fluid pt-4 px-4 ">
+        <div class="row g-4">
+          <div class="col-12">
+            <div class="bg-secondary rounded h-100 p-4">
+              <h6 class="mb-4">Basic Accordion</h6>
+              <div class="accordion" id="accordionExample">
+                <div class="accordion-item bg-transparent">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Accordion Item #1
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      Gubergren justo eos magna eirmod lorem magna, amet dolores ipsum sadipscing ipsum consetetur
+                      invidunt
+                      et clita diam, vero dolor dolor est eirmod. Rebum accusam amet ipsum et. Et et lorem sanctus amet
+                      eos
+                      eos elitr ea, sanctus magna et et sed eos sit takimata sadipscing, dolor rebum sed stet vero.
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="accordion-item bg-transparent">
-              <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Accordion Item #2
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  Voluptua sit dolores consetetur ea et diam est et takimata. Et erat sadipscing dolores et stet diam ut
-                  ut diam, sit aliquyam no magna et dolore lorem dolor sit. Lorem lorem sed sed duo, eirmod sit diam
-                  ipsum sit erat, lorem sit dolor diam amet ea aliquyam tempor rebum invidunt,.
+                <div class="accordion-item bg-transparent">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Accordion Item #2
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      Voluptua sit dolores consetetur ea et diam est et takimata. Et erat sadipscing dolores et stet
+                      diam
+                      ut
+                      ut diam, sit aliquyam no magna et dolore lorem dolor sit. Lorem lorem sed sed duo, eirmod sit diam
+                      ipsum sit erat, lorem sit dolor diam amet ea aliquyam tempor rebum invidunt,.
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="accordion-item bg-transparent">
-              <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Accordion Item #3
-                </button>
-              </h2>
-              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  Dolore eos dolor tempor justo sea eos amet eos kasd dolor, et diam tempor lorem dolores vero. Stet
-                  dolore gubergren nonumy diam. Consetetur sit takimata magna invidunt, dolore sea amet consetetur ea et
-                  rebum, invidunt et amet sit sea. Dolor eirmod sed magna sadipscing sadipscing lorem lorem sed, sit
-                  lorem.
+                <div class="accordion-item bg-transparent">
+                  <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Accordion Item #3
+                    </button>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      Dolore eos dolor tempor justo sea eos amet eos kasd dolor, et diam tempor lorem dolores vero. Stet
+                      dolore gubergren nonumy diam. Consetetur sit takimata magna invidunt, dolore sea amet consetetur
+                      ea
+                      et
+                      rebum, invidunt et amet sit sea. Dolor eirmod sed magna sadipscing sadipscing lorem lorem sed, sit
+                      lorem.
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

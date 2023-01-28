@@ -11,19 +11,23 @@
           <h3 class="text-primary"><i class="fa fa-home"></i> sixman</h3>
         </a>
         <div class="navbar-nav w-100">
-          {% if User != "main" %}
-          <a href="/index/{{User}}/" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-          <a href="/detail/{{User}}/" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Detail</a>
-          <a href="/input/{{User}}/" class="nav-item nav-link active"><i class="fa fa-keyboard me-2"></i>Input</a>
-          <a href="/record/{{User}}/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Record</a>
-          <a href="/realtime/{{User}}/" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Realtime</a>
+          {% if context.User != "main" %}
+          <a href="/index/{{context.User}}/" class="nav-item nav-link"><i
+              class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+          <a href="/detail/{{context.User}}/" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Detail</a>
+          <a href="/input/{{context.User}}/" class="nav-item nav-link active"><i
+              class="fa fa-keyboard me-2"></i>Input</a>
+          <a href="/record/{{context.User}}/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Record</a>
+          <a href="/realtime/{{context.User}}/" class="nav-item nav-link"><i
+              class="fa fa-chart-bar me-2"></i>Realtime</a>
           <div class="nav-item dropdown">
-          <a href="/disign/{{User}}/" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Design</a>
-          <div class="dropdown-menu bg-transparent border-0">
-            <a href="signin.html" class="dropdown-item">Sign In</a>
-            <a href="signup.html" class="dropdown-item">Sign Up</a>
+            <a href="/disign/{{context.User}}/" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                class="far fa-file-alt me-2"></i>Design</a>
+            <div class="dropdown-menu bg-transparent border-0">
+              <a href="signin.html" class="dropdown-item">Sign In</a>
+              <a href="signup.html" class="dropdown-item">Sign Up</a>
+            </div>
           </div>
-        </div>
           {% else %}
           <a href="/index/main/" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
           <a href="/detail/main/" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Detail</a>
@@ -33,11 +37,11 @@
           <div class="nav-item dropdown">
             <a href="/disign/main/" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                 class="far fa-file-alt me-2"></i>Design</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                  <a href="signin.html" class="dropdown-item">Sign In</a>
-                  <a href="signup.html" class="dropdown-item">Sign Up</a>
-                </div>
-              </div>
+            <div class="dropdown-menu bg-transparent border-0">
+              <a href="signin.html" class="dropdown-item">Sign In</a>
+              <a href="signup.html" class="dropdown-item">Sign Up</a>
+            </div>
+          </div>
           {% endif %}
         </div>
       </nav>
@@ -49,33 +53,52 @@
       <!-- Navbar Start -->
       {% include 'navbar.html' %}
       <!-- Navbar End -->
-      <div class="col-sm-12 col-xl-6">
-        <div class="bg-secondary rounded h-100 p-4">
-          <h6 class="mb-4">Basic Form</h6>
-          <form>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+
+
+      <div class="container-fluid pt-4 px-4 ">
+        <div class="row g-4">
+          <div class="col-12">
+            <div class="bg-secondary rounded h-100 p-4">
+              <h6 class="mb-4">Input Info</h6>
+              <div class="table-responsive text-center">
+                <table class="table text-center">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">speed</th>
+                      <th scope="col">battey</th>
+                      <th scope="col">color</th>
+                      <th scope="col">User</th>
+                      <th scope="col">제출</th>
+                    </tr>
+                  </thead>
+                  <tbody class="align-middle">
+                    <form action="createmycar/" method="get">
+                      <tr>
+                        <th scope="row">No.</th>
+                        <td><input name="speed" type="text" class="form-control text-center"
+                            style="width: 40%; margin:auto;" placeholder="speed ex)100">
+                        </td>
+                        <td><input name="battery" type="text" class="form-control text-center"
+                            style="width: 40%; margin:auto;" placeholder="bettary ex)100">
+                        <td><input name="color" type="text" class="form-control text-center"
+                            style="width: 40%; margin:auto;" placeholder="color ex)100">
+                        <td><input class="form-control text-center" style="width: 40%; margin:auto;" type="text"
+                            placeholder="Disabled input" aria-label="Disabled input example" disabled>
+                        </td>
+                        <td><button type="submit" class="btn btn-success m-2">제출</button>
+                        </td>
+                      </tr>
+                    </form>
+                  </tbody>
+                </table>
+                <div class="text-start text-danger">&nbsp;&nbsp;&nbsp;&nbsp;{{text.errormessage}}</div>
+
               </div>
             </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-          </form>
+          </div>
         </div>
       </div>
-
-
-
-
-
 
 
       <!-- Footer Start -->
