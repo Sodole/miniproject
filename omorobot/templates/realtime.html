@@ -23,8 +23,8 @@
             <a href="/disign/{{context.User}}/" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                 class="far fa-file-alt me-2"></i>Design</a>
             <div class="dropdown-menu bg-transparent border-0">
-              <a href="signin.html" class="dropdown-item">Sign In</a>
-              <a href="signup.html" class="dropdown-item">Sign Up</a>
+              <a href="/" class="dropdown-item">sodole</a>
+              <a href="/" class="dropdown-item">file</a>
             </div>
           </div>
           {% else %}
@@ -37,8 +37,8 @@
             <a href="/disign/main/" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                 class="far fa-file-alt me-2"></i>Design</a>
             <div class="dropdown-menu bg-transparent border-0">
-              <a href="signin.html" class="dropdown-item">Sign In</a>
-              <a href="signup.html" class="dropdown-item">Sign Up</a>
+              <a href="/" class="dropdown-item">sodole</a>
+              <a href="/" class="dropdown-item">file</a>
             </div>
           </div>
           {% endif %}
@@ -53,46 +53,141 @@
       {% include 'navbar.html' %}
       <!-- Navbar End -->
 
-
-      <!-- Chart Start -->
+      <!-- preview Start -->
       <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
-          <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary rounded h-100 p-4">
-              <h6 class="mb-4">Single Line Chart</h6>
-              <canvas id="line-chart"></canvas>
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-chart-line fa-3x text-primary"></i>
+              <div class="ms-3 text-end">
+                <p class="mb-2">Speed</p>
+                <h6 class="mb-0">{{last_mycar.mycar_speed}}km/h</h6>
+              </div>
             </div>
           </div>
-          <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary rounded h-100 p-4">
-              <h6 class="mb-4">Multiple Line Chart</h6>
-              <canvas id="salse-revenue"></canvas>
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-chart-pie fa-3x text-primary"></i>
+              <div class="ms-3 text-end">
+                <p class="mb-2">Battery</p>
+                <h6 class="mb-0">{{last_mycar.mycar_battery}} %</h6>
+              </div>
             </div>
           </div>
-          <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary rounded h-100 p-4">
-              <h6 class="mb-4">Single Bar Chart</h6>
-              <canvas id="bar-chart"></canvas>
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-palette fa-3x text-primary"></i>
+              <div class="ms-3 text-end">
+                <p class="mb-2">Color</p>
+                <h6 class="mb-0">
+                  <div class="btn btn-sm p-0 h-100" style="background-color : {{last_mycar.mycar_color}}; width : 100%"
+                    role="button"> &nbsp; &nbsp; &nbsp;color &nbsp; &nbsp; &nbsp;</div>
+                </h6>
+              </div>
             </div>
           </div>
-          <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary rounded h-100 p-4">
-              <h6 class="mb-4">Doughnut Chart</h6>
-              <canvas id="doughnut-chart"></canvas>
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-chart-bar fa-3x text-primary"></i>
+              <div class="ms-3 text-end">
+                <p class="mb-2">Created</p>
+                <h6 class="mb-0">{{last_mycar.created_at}}</h6>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- Chart End -->
+      <!-- preview End -->
 
 
+      <!-- Battery&speed Chart Start -->
+      <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary text-center rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">speed (latest 10)</h6>
+              </div>
+              <canvas id="speed"></canvas>
+            </div>
+          </div>
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary text-center rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">battery (latest 5)</h6>
+              </div>
+              <canvas id="battery"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Battery&speed Chart End -->
+
+
+      <!-- Record Start -->
+      <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary text-center rounded p-4">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Record (latest 5)</h6>
+            <a href="/record/{{context.User}}">Show All</a>
+          </div>
+          <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+              <thead class=" text-center">
+                <tr class="text-white">
+                  <th scope="col"></th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Speed</th>
+                  <th scope="col">battery</th>
+                  <th scope="col">Color</th>
+                  <th scope="col">User</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody class=" text-center">
+                <tr>
+                  {% if context.User != "main" %}
+                  {% for mycar in mycars %}
+                  <td><input class="form-check-input" type="checkbox"></td>
+                  <th scope="row" style="width: 20%;">{{mycar.created_at}}</th>
+                  <td>{{mycar.mycar_speed}} km/h</td>
+                  <td>{{mycar.mycar_battery}} %</td>
+                  <td>
+                    <div class="btn btn-sm p-0 h-100" style="background-color : {{mycar.mycar_color}}; width : 80%"
+                      role="button">
+                      color</div>
+                  </td>
+                  <td>{{mycar.user_name}}</td>
+                  <td><a href="{{mycar.get_delete_url}}" class="btn btn-danger btn-sm p-0 h-100" role="button">삭제</a>
+                </tr>
+                {% endfor %}
+                {% else %}
+                {% for mycar in mycars %}
+                <td><input class="form-check-input" type="checkbox"></td>
+
+                <th scope="row" style="width: 20%;">{{mycar.created_at}}</th>
+                <td>{{mycar.mycar_speed}} km/h</td>
+                <td>{{mycar.mycar_battery}} %</td>
+                <td>
+                  <div class="btn btn-sm p-0 h-100" style="background-color : {{mycar.mycar_color}}; width : 80%"
+                    role="button">
+                    color</div>
+                </td>
+                <td style="width: 10%;"></td>
+                <td>삭제불가</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Record End -->
       <!-- Footer Start -->
       {% include 'footer.html' %}
       <!-- Footer End -->
     </div>
-    <!-- Content End -->
-
-  </div>
   </div>
   <!-- JavaScript Libraries -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -105,8 +200,100 @@
   <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
   <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
 
-  <!-- Template Javascript -->
-  <script src="{% static 'js/realtime.js' %}"></script>
+  <!-- index Javascript -->
+  <script type="text/javascript">
+    (function ($) {
+      "use strict";
+
+      // Spinner
+      var spinner = function () {
+        setTimeout(function () {
+          if ($('#spinner').length > 0) {
+            $('#spinner').removeClass('show');
+          }
+        }, 1);
+      };
+      spinner();
+
+      // Sidebar Toggler
+      $('.sidebar-toggler').click(function () {
+        $('.sidebar, .content').toggleClass("open");
+        return false;
+      });
+
+      // Progress Bar
+      $('.pg-bar').waypoint(function () {
+        $('.progress .progress-bar').each(function () {
+          $(this).css("width", $(this).attr("aria-valuenow") + '%');
+        });
+      }, { offset: '80%' });
+
+      // Calender
+      $('#calender').datetimepicker({
+        inline: true,
+        format: 'L'
+      });
+
+      // Testimonials carousel
+      $(".testimonial-carousel").owlCarousel({
+        autoplay: true,
+        smartSpeed: 1000,
+        items: 1,
+        dots: true,
+        loop: true,
+        nav: false
+      });
+
+      // Chart Global Color
+      Chart.defaults.color = "#6C7293";
+      Chart.defaults.borderColor = "#000000";
+
+      // speed Chart
+      var ctx3 = $("#speed")?.get(0).getContext("2d");
+      var myChart3 = new Chart(ctx3, {
+        type: "line",
+        data: {
+          labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          datasets: [{
+            label: "Salse",
+            fill: false,
+            backgroundColor: "rgba(235, 22, 22, .7)",
+            data: {{ speed }}
+      }]
+              },
+      options: {
+      responsive: true
+    }
+          });
+
+
+    // battery Chart
+    var ctx4 = $("#battery")?.get(0).getContext("2d");
+    var myChart4 = new Chart(ctx4, {
+      type: "bar",
+      data: {
+        labels: ["1", "2", "3", "4", "5"],
+        datasets: [{
+          label: "Mycar",
+
+          backgroundColor: [
+            "rgba(235, 22, 22, .4)",
+            "rgba(235, 22, 22, .5)",
+            "rgba(235, 22, 22, .6)",
+            "rgba(235, 22, 22, .7)",
+            "rgba(235, 22, 22, .8)"
+          ],
+          data: {{ battery }}
+    }]
+              },
+    options: {
+      responsive: true
+    }
+          });
+
+      }) (jQuery);
+  </script>
+
 </body>
 
 </html>

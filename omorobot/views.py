@@ -23,8 +23,10 @@ def signin(request):
 
 def signup(request):
     global context
+    models = Model.objects.all()
     context = {
-    "signupmessage" : ""
+    "signupmessage" : "",
+    "sel_models" : models
 }
     return render(request, "signup.html", context)
 
@@ -82,13 +84,19 @@ def detail(request, pk):
     if User.objects.filter(user_name = f"{pk}").exists() :
         old_user = User.objects.get(user_name=f"{pk}")
         old_name = old_user.user_name
+        old_model = old_user.model_name
+        mymodel = Model.objects.filter(model_name = old_model)
         allcontext = {
-            "context" : {"User" : old_name}
+            "context" : {"User" : old_name},
+            "mymodel" : mymodel
         }
         return render(request, "detail.html", allcontext)
     elif pk == "main" :
+        mymodel = Model.objects.all()
         allcontext = {
-            "context" : {"User" : "main"}
+            "context" : {"User" : "main"},
+            "mymodel" : mymodel
+
         }
         return render(request, "detail.html", allcontext)
 
