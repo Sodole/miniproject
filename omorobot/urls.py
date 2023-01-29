@@ -19,4 +19,6 @@ urlpatterns = [
     path("index/<str:fk>/deletemycar/<int:pk>", delete_mycar_index, name="delete_mycar_index"),
     path("index/<str:pk>/", index, name="index"),  
     path("deleteuser/<str:pk>/", delete_user, name="delete_user"),
+    path("model/", model, name="model"),
+    path("model/createmodel/", create_model, name ="create_model"),
 ]

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import User, Mycar
+from .models import User, Mycar, Model
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -308,3 +308,24 @@ def update_mycar(request, pk) :
     old_minicar.color = mycar_color
     old_minicar.save()
     return HttpResponseRedirect(reverse("omorobot:index"))
+
+
+
+## 모델관리
+# 모델생성페이지
+def model(request):
+    return render(request, "model.html")
+
+# create 모델
+def create_model(request) : 
+    new_model = Model()
+    new_model.model_name = request.GET.get("model_name")
+    new_model.model_size = request.GET.get("model_size")
+    new_model.model_battery = request.GET.get("model_battery")
+    new_model.model_weight = request.GET.get("model_weight")
+    new_model.model_firmware = request.GET.get("model_firmware")
+    new_model.save()
+    context ={
+        "message" : "모델생성이 완료되었습니다."
+    }
+    return render(request, "model.html", context)
