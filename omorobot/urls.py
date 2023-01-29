@@ -13,8 +13,10 @@ urlpatterns = [
     path("detail/<str:pk>/", detail, name="detail"),
     path("input/<str:pk>/createmycar/", create_mycar, name="create_mycar"),
     path("input/<str:pk>/", input, name="input"),
+    path("record/<str:fk>/deletemycar/<int:pk>", delete_mycar, name="delete_mycar"),
     path("record/<str:pk>/",record, name="record"),
     path("realtime/<str:pk>/", realtime, name="realtime"),
+    path("index/<str:fk>/deletemycar/<int:pk>", delete_mycar_index, name="delete_mycar_index"),
     path("index/<str:pk>/", index, name="index"),  
     path("deleteuser/<str:pk>/", delete_user, name="delete_user"),
 ]

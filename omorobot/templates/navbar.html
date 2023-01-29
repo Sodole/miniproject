@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
   <div class="navbar-nav align-items-center ms-auto">
+    {% if context.User == "main" %}
     <div class="nav-item dropdown">
       <a href="/signin/" class="nav-link">
         <i class="fa fa-user me-lg-2"></i>
@@ -12,8 +13,10 @@
         <span class="d-none d-lg-inline-flex">회원가입</span>
       </a>
     </div>
+    {% else %}
     <div class="nav-item dropdown">
       <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+        <i class="fa fa-info me-lg-2"></i>
         <span class="d-none d-lg-inline-flex">{{context.User}}</span>
       </a>
       <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
@@ -21,5 +24,6 @@
         <a href="/" class="dropdown-item">Log Out</a>
       </div>
     </div>
+    {% endif %}
   </div>
 </nav>

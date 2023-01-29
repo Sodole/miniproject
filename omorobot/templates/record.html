@@ -59,47 +59,45 @@
           <div class="col-12">
             <div class="bg-secondary rounded h-100 p-4">
               <h6 class="mb-4">All Record</h6>
-              <div class="table-responsive">
-                <table class="table">
+              <div class="table-responsive text-center">
+                <table class="table text-center">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First Name</th>
-                      <th scope="col">Last Name</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Country</th>
-                      <th scope="col">ZIP</th>
-                      <th scope="col">Status</th>
+                      <th scope="col">created</th>
+                      <th scope="col">speed</th>
+                      <th scope="col">battey</th>
+                      <th scope="col">color</th>
+                      <th scope="col">User</th>
+                      <th scope="col">삭제</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">1</th>
-                      <td>John</td>
-                      <td>Doe</td>
-                      <td>jhon@email.com</td>
-                      <td>USA</td>
-                      <td>123</td>
-                      <td>Member</td>
+                      {% if context.User != "main" %}
+                      {% for mycar in mycars %}
+                      <th scope="row" style="width: 20%;">{{mycar.created_at}}</th>
+                      <td>{{mycar.mycar_speed}}</td>
+                      <td>{{mycar.mycar_battery}}</td>
+                      <td>
+                        <div class="btn btn-sm p-0 h-100" style="background-color : {{mycar.mycar_color}}; width : 80%"
+                          role="button">color</div>
+                      </td>
+                      <td>{{mycar.user_name}}</td>
+                      <td><a href="{{mycar.get_delete_url}}" class="btn btn-danger btn-sm p-0 h-100"
+                          role="button">삭제</a>
                     </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>mark@email.com</td>
-                      <td>UK</td>
-                      <td>456</td>
-                      <td>Member</td>
+                    {% endfor %}
+                    {% else %}
+                    {% for mycar in mycars %}
+                    <th scope="row" style="width: 20%;">{{mycar.created_at}}</th>
+                    <td>{{mycar.mycar_speed}}</td>
+                    <td>{{mycar.mycar_battery}}</td>
+                    <td>{{mycar.mycar_color}}</td>
+                    <td style="width: 10%;"></td>
+                    <td>삭제불가</td>
                     </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>jacob@email.com</td>
-                      <td>AU</td>
-                      <td>789</td>
-                      <td>Member</td>
-                    </tr>
+                    {% endfor %}
+                    {% endif %}
                   </tbody>
                 </table>
               </div>

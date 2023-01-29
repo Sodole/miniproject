@@ -64,7 +64,7 @@
                 <table class="table text-center">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
+                      <th scope="col">created</th>
                       <th scope="col">speed</th>
                       <th scope="col">battey</th>
                       <th scope="col">color</th>
@@ -75,16 +75,16 @@
                   <tbody class="align-middle">
                     <form action="createmycar/" method="get">
                       <tr>
-                        <th scope="row">No.</th>
+                        <th scope="row">auto</th>
                         <td><input name="speed" type="text" class="form-control text-center"
-                            style="width: 40%; margin:auto;" placeholder="speed ex)100">
+                            style="width: 40%; margin:auto;" placeholder="ex)100">
                         </td>
                         <td><input name="battery" type="text" class="form-control text-center"
-                            style="width: 40%; margin:auto;" placeholder="bettary ex)100">
-                        <td><input name="color" type="text" class="form-control text-center"
-                            style="width: 40%; margin:auto;" placeholder="color ex)100">
+                            style="width: 40%; margin:auto;" placeholder="ex)100"></td>
+                        <td><input type="color" class="form-control form-control-color text-center" style="margin:auto;"
+                            id="exampleColorInput" value="#563d7c" name="color"></td>
                         <td><input class="form-control text-center" style="width: 40%; margin:auto;" type="text"
-                            placeholder="Disabled input" aria-label="Disabled input example" disabled>
+                            placeholder="{{context.User}}" aria-label="Disabled input example" disabled>
                         </td>
                         <td><button type="submit" class="btn btn-success m-2">제출</button>
                         </td>

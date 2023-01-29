@@ -37,7 +37,7 @@ class Mycar(models.Model):
   user_name = models.ForeignKey("User", on_delete=models.CASCADE, db_column='user_name')
 
   def get_delete_url(self) :
-    return f"deletemycar/{self.pk}/"
+    return f"deletemycar/{self.pk}"
   
   def get_update_url(self) :
     return f"updatemycar/{self.pk}/"

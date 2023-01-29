@@ -32,17 +32,46 @@ def index(request, pk):
     global inputmessage
     inputmessage = {
             "errormessage" :""}
-    mycar = Mycar.objects.all()
+    speed_data_set =[]
+    battery_data_set=[]
     if User.objects.filter(user_name = f"{pk}").exists() :
         old_user = User.objects.get(user_name=f"{pk}")
         old_name = old_user.user_name
+        mycars = Mycar.objects.filter(user_name=f"{pk}").order_by("-pk")
+        record_mycars = mycars[:5]
+        last_mycar = Mycar.objects.filter(user_name=f"{pk}").last()
+        mycar_dataset = mycars.order_by("-pk")[:10]
+        for data in mycar_dataset :
+            speed_data_set.append(data.mycar_speed)
+            battery_data_set.append(data.mycar_battery)
+        battery_data_set = battery_data_set[:5]
+        battery_data_set.reverse()
+        speed_data_set.reverse() 
         allcontext = {
-            "context" : {"User" : old_name, "mycars": mycar}
+            "context" : {"User" : old_name},
+            "mycars" : record_mycars,
+            "last_mycar" : last_mycar,
+            "speed" : speed_data_set,
+            "battery" : battery_data_set
         }
         return render(request, "index.html", allcontext)
     elif pk == "main" :
+        mycars = Mycar.objects.all().order_by("-pk")
+        last_mycar = Mycar.objects.all().last()
+        record_mycars = mycars[:5]
+        mycar_dataset = mycars.order_by("-pk")[:10]
+        for data in mycar_dataset :
+            speed_data_set.append(data.mycar_speed)
+            battery_data_set.append(data.mycar_battery)
+        battery_data_set = battery_data_set[:5]
+        battery_data_set.reverse()
+        speed_data_set.reverse() 
         allcontext = {
-            "context" : {"User" : "main"}
+            "context" : {"User" : "main"},
+            "mycars" : record_mycars,
+            "last_mycar" : last_mycar,
+            "speed" : speed_data_set,
+            "battery" : battery_data_set
         }
         return render(request, "index.html", allcontext)
 
@@ -89,13 +118,18 @@ def record(request, pk):
     if User.objects.filter(user_name = f"{pk}").exists() :
         old_user = User.objects.get(user_name=f"{pk}")
         old_name = old_user.user_name
+        mycars = Mycar.objects.filter(user_name=f"{pk}").order_by("-pk")
         allcontext = {
-            "context" : {"User" : old_name}
+            "context" : {"User" : old_name},
+            "mycars" : mycars
         }
         return render(request, "record.html", allcontext)
     elif pk == "main" :
+        mycar = Mycar.objects.all().order_by("-pk")
+        mycars = mycar[:15]
         allcontext = {
-            "context" : {"User" : "main"}
+            "context" : {"User" : "main"},
+            "mycars" : mycars
         }
         return render(request, "record.html", allcontext)
 
@@ -150,7 +184,7 @@ def create_user(request) :
         # 중복아이디 확인
         elif User.objects.filter(user_name = f"{signup_username}").exists() :
             context = {
-                "signupmessage" : "중복id가있다."
+                "signupmessage" : "중복id가 있습니다"
             }
             return HttpResponseRedirect(reverse("omorobot:create_user"))  
         else :
@@ -251,10 +285,17 @@ def create_mycar(request, pk):
         }
         return HttpResponseRedirect(f"/input/{pk}/")
 
-def delete_mycar(request, pk):
-    del_mycar = Mycar.objects.filter(pk=pk)
+def delete_mycar(request, pk, fk):
+    del_car = Mycar.objects.filter(user_name = f"{fk}")
+    del_mycar = del_car.filter(pk=pk)
     del_mycar.delete()
-    return HttpResponseRedirect(reverse("omorobot:index"))
+    return HttpResponseRedirect(f"/record/{fk}")
+
+def delete_mycar_index(request, pk, fk):
+    del_car = Mycar.objects.filter(user_name = f"{fk}")
+    del_mycar = del_car.filter(pk=pk)
+    del_mycar.delete()
+    return HttpResponseRedirect(f"/index/{fk}")
 
 def update_mycar(request, pk) :
   if request.method == "POST" :
